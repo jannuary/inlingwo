@@ -24,9 +24,7 @@ else{
     cout("error : Lend!");
 }
 
-
-// 数据处理并插入
-function lendData(){
+function lendData(){        // 数据处理并插入
     // 先判断必要的数据
     $thing   = addslashes($_POST['thing']);
     $pmsdate = $_POST['promise_date_of_return'];
@@ -41,9 +39,7 @@ function lendData(){
     return true;
 }
 
-
-// 借同名的设备是否已经归还，如果没有归还则返回错误
-function isRrturn(){
+function isRrturn(){        // 借同名的设备是否已经归还，如果没有归还则返回错误
     $sql = "select * from lend_device where mem_id=".$GLOBALS['ID']."  and device='".addslashes($_POST['thing'])."' and return_status is NULL";
     $item = $GLOBALS['DBobj']->sel($sql);
     if($item){

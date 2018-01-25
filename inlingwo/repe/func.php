@@ -1,7 +1,5 @@
 <?php
 
-// style();
-
 // 防止直接访问
 function getRef()
 {
@@ -64,15 +62,10 @@ function style(){
 
 // 输出内容
 function cout($str=NULL){
-
-    // error 处理
-    $str = str_ireplace("error"," <span class='e'>ERROR</span> ",$str);
-    // success 处理
-    $str = str_ireplace("success"," <span class='s'>Success</span> ",$str);
-    $str = $str."</br>";
+    $str = str_ireplace("error","ERROR ",$str);
+    $str = str_ireplace("success","Success",$str);
     echo $str;
 }
-
 
 // 是否对数据处理
 function ckVal(){

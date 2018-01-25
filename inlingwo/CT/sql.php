@@ -40,7 +40,7 @@ $Table = array(
         id int AUTO_INCREMENT  PRIMARY KEY,
         blog_id int not null,
         title varchar(80) not null,
-        article_id char(15) not null,
+        article_id char(80) not null,
         created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
     );',
     'blog_msg'=>

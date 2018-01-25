@@ -13,7 +13,6 @@ else{
     cout("Error : KEY MUST!");
 }
 
-
 function retData(){
     // 根据个人ID查找有无此物
     $device = addslashes($_POST['thing']);

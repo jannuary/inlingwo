@@ -18,7 +18,6 @@ else{
 // 数据录入
 function scheData(){
     $data = $_POST[$GLOBALS['json_post']];     // 要修改的数据
-  //  $data = file_get_contents('../schedule.json');
     $data = json_decode($data,true);
     $skey = array("mem_id");
     $sval = array($GLOBALS['ID']);

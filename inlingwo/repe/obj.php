@@ -74,8 +74,7 @@ class Login{
     var $mem_id;
 
     function __construct() {
-        // 检查post数据是否有为空
-        foreach($_POST as $key => $var){   
+        foreach($_POST as $key => $var){        // 检查post数据是否有为空
             if((!$key || !$var) && !ckVal()){
                     die(cout('KEY NULL ERROR!'));                   
             }
@@ -87,8 +86,7 @@ class Login{
         }
     }
 
-    // 检测注销  $OUT 检测还是注销，默认是登陆状态 $OUT=true 为注销
-    function logout($OUT=FALSE){
+    function logout($OUT=FALSE){        // 检测注销  $OUT 检测还是注销，默认是登陆状态 $OUT=true 为注销
         if(!$this->cookie){
             return true;
         }
@@ -108,22 +106,17 @@ class Login{
         }
     }
 
-    // 注册
-    function register(){
-        // 先同名处理
-        $sql = 'select name from member where name="'.$this->data['name'].'"';
+    function register(){        // 注册
+        $sql = 'select name from member where name="'.$this->data['username'].'"';
         $result = $GLOBALS['DBobj']->sel($sql,'name');
         if(!empty($result)){
-            // $login = $GLOBALS['index'];
-            // header("Location:$login");
-            $er = "ERROR : [ ".stripslashes($this->data['name'])." ] Already Exists!";
+            $er = "ERROR : [ ".stripslashes($this->data['username'])." ] Already Exists!";
             cout($er);
             return false;
         }else{
             $cookie = md5(time()+$this->data['passwd']);
-        //    setcookie('LS',$cookie,$GLOBALS['cookie_destroy'],'/','localhost');
             $passwd = md5($this->data['passwd']);
-            $name = $this->data['name'];
+            $name = $this->data['username'];
             $sql = "insert into member(name,passwd) 
                     values('$name','$passwd')";
             $GLOBALS['DBobj']->querySql($sql);
@@ -132,25 +125,21 @@ class Login{
         }
     }
 
-    // 登录
-    function login(){
-        // 名字转id
-        $sql = 'select * from member where name="'.$this->data['name'].'"';
+    function login(){       // 登录
+        $sql = 'select * from member where name="'.$this->data['username'].'"';
         $this->mem_id = $GLOBALS['DBobj']->sel($sql,'name');
         if(!empty($this->mem_id)){
-            $this->mem_id = $this->mem_id[stripslashes($this->data['name'])]['mem_id'];
+            $this->mem_id = $this->mem_id[stripslashes($this->data['username'])]['mem_id'];
         }else{
             die(cout("Error : Name Not Exists!"));
         }
 
-        // 判断 name => passwd
         $passwd = md5($this->data['passwd']);
-        // $name = $this->data['name'];
         $sql = "select * from member 
                 where mem_id='$this->mem_id'";
         $login = $GLOBALS['DBobj']->sel($sql,'mem_id');
         if($login[$this->mem_id]['passwd'] === $passwd){
-            // 判断之前是否登陆过      别人拿了你的cookie就可以登录了？
+            // 判断之前是否登陆过   
             $cookie = md5(time().$this->data['passwd']);
             $sql    = "select * from login_check where mem_id='$this->mem_id'";
             $result = $GLOBALS['DBobj']->sel($sql,'mem_id');

@@ -1,6 +1,5 @@
-<?php
+<?php       // 只要访问即可
 require("../main.php");
-// 只要访问即可
 if(!$Lg->logout()){
     $ti = limitTime();  // 获取时间段
     if($ti){    

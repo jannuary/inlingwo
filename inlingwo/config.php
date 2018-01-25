@@ -18,7 +18,7 @@ $cookie_destroy = time()+60*60*24*30;
 // 假设接受schedule的json 文件名为 json_post
 $json_post = 'schedule';
 
-// 签到时间段设置
+// Time set
 $limit_work_attendance_time = array(
     'mon' => array(
         'begin'=> "7:30",
